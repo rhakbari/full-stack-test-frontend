@@ -1,15 +1,17 @@
 <template>
   <img
-    class="vuetify-logo"
-    alt="Vuetify Logo"
-    src="/vuetify-logo.svg"
+    class="Delivery-logo"
+    alt="Delivery Logo"
+    src="/delivery.gif"
   >
 </template>
 
 <style>
-.vuetify-logo {
-  height: 180px;
-  width: 180px;
+.Delivery-logo {
+  padding: 100px;
+  min-height: 600px;
+  height: 800px;
+  width: 100%;
   transform: rotateY(560deg);
   animation: turn 3.5s ease-out forwards 1s;
 }

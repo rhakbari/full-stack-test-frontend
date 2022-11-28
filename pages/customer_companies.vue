@@ -6,27 +6,19 @@
 
       <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
     </v-card-title>
-    <v-data-table :headers="headers" :items="rows" :search="search"></v-data-table>
+    <v-data-table :headers="headers" :items="items" :search="search" :items-per-page="5"></v-data-table>
   </v-card>
 </template>
   
 <script>
+import axios from 'axios'
 export default {
 
-  async asyncData(context) {
-    let response = await context.$axios.$get('http://localhost:8000/customer_company')
-    let dataList = response.data.data.map(item => item)
-    return dataList
-  },
-
   data() {
-
     return {
-      
-      search: '',
       headers: [{
         text: 'ID',
-        value: 'id'
+        value: 'ID'
       },
 
       {
@@ -39,8 +31,33 @@ export default {
       },
 
       ],
+      items: [],
+      search: '',
     }
 
   },
+
+  mounted() {
+    this.loadItems()
+  },
+
+  methods: {
+   
+    loadItems() {
+      this.items = []
+      axios.get(`http://localhost:8000/customer_company`)
+        .then((response) => {
+          this.items = response.data.data.map((item) => {
+            return {
+            
+              ...item
+            }
+          })
+        }).catch((error) => {
+          console.log(error)
+        })
+    },
+
+  }
 }
 </script>
