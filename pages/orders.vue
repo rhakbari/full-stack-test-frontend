@@ -12,6 +12,7 @@
   
 <script>
 import axios from 'axios'
+import moment from 'moment';
 export default {
 
   data() {
@@ -22,7 +23,7 @@ export default {
       },
 
       {
-        text: 'Created At',
+        text: 'Order Date',
         value: 'created_at'
       },
       {
@@ -52,7 +53,8 @@ export default {
         .then((response) => {
           this.items = response.data.data.map((item) => {
             return {
-              ...item
+              ...item,
+              created_at: moment(item.created_at).format('MMMM Do YYYY, h:mm:ss a'),
             }
           })
         }).catch((error) => {
