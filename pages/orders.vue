@@ -13,6 +13,7 @@
 <script>
 import axios from 'axios'
 import moment from 'moment';
+
 export default {
 
   data() {
@@ -45,8 +46,9 @@ export default {
   mounted() {
     this.loadItems()
   },
+  
   methods: {
-   
+    
     loadItems() {
       this.items = []
       axios.get(`http://localhost:8000/orders`)
@@ -57,6 +59,7 @@ export default {
               created_at: moment(item.created_at).format('MMMM Do YYYY, h:mm:ss a'),
             }
           })
+          
         }).catch((error) => {
           console.log(error)
         })
